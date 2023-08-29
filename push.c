@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  *push - function push
  *@stack: to update the stack pointer after adding a new item.
@@ -32,4 +31,3 @@ void push(stack_t **stack, int value, unsigned int line_number)
 	}
 	*stack = newnode;
 }
-

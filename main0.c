@@ -13,7 +13,7 @@ main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
@@ -40,6 +40,7 @@ main(int argc, char *argv[])
 			else
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+				fprintf(stderr, "USAGE: monty file\n");
 				fclose(file);
 				return (EXIT_FAILURE);
 			}

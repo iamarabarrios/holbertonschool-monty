@@ -55,8 +55,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *add_node(stack_t **stack, const int n);
-
 int check_for_digit(char *arg);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
@@ -67,9 +65,10 @@ void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void get_op(char *op, stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
-void free_lineptr(int status, void *arg);
-void free_stack(int status, void *arg);
-void fs_close(int status, void *arg);
 int main(int argc, char *argv[]);
+void free_stack(int status, void *arg);
+void m_fs_close(int status, void *arg);
+void free_lineptr(int status, void *arg);
+stack_t *add_node(stack_t **stack, const int n);
 
 #endif

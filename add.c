@@ -1,5 +1,7 @@
 #include "monty.h"
 
+var_t var;
+
 /**
  * add - add the top two elements of the stack
  * @stack: double pointer tot he beginning of the stack

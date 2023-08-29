@@ -4,7 +4,7 @@
  *@status: int
  *@arg: pointer
  */
-void free_lineptr(int status, void *arg)
+void free_lineptr(int status __attribute__((unused)), void *arg)
 {
 	char **lineptr = arg;
 
@@ -20,7 +20,7 @@ void free_lineptr(int status, void *arg)
  * @status: int
  * @arg: Pointer
  */
-void free_stack(int status, void *arg)
+void free_stack(int status __attribute__((unused)), void *arg)
 {
 	stack_t **stack = (stack_t **)arg;
 
@@ -36,14 +36,14 @@ void free_stack(int status, void *arg)
  * fs_close - fclose
  * @status: int
  * @arg: Pointer
+ * Return: void
  */
-void fs_close(int status, void *arg)
+void fs_close(int status __attribute__((unused)), void *arg)
 {
-	FILE *fs = arg;
+	FILE *fs;
 
-	if (fs != NULL)
-	{
+	(void)status;
+
+	fs = (FILE *) arg;
 	fclose(fs);
-	}
 }
-

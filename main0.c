@@ -11,9 +11,9 @@ main(int argc, char *argv[])
 	FILE *file;
 	stack_t *temp = top;
 
-	if (argc != 4)
+	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s %s %s\n", argv[0], argv[1], argv[2]);
+		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
@@ -25,6 +25,7 @@ main(int argc, char *argv[])
 	}
 	while (fgets(buffer, sizeof(buffer), file) != NULL)
 	{
+		line_number++;
 		buffer[strcspn(buffer, "\n")] = '\0';
 		if (sscanf(buffer, "%s %d", opcode, &value) == 2)
 		{

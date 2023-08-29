@@ -67,7 +67,7 @@ void get_op(char *op, stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 int main(int argc, char *argv[]);
 void free_stack(int status, void *arg);
-void m_fs_close(int status, void *arg);
+void fs_close(int status, void *arg);
 void free_lineptr(int status, void *arg);
 stack_t *add_node(stack_t **stack, const int n);
 

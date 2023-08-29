@@ -1,8 +1,9 @@
-#ifndef "MONTY_H"
-#define "MONTY_H"
+#ifndef MONTY_H
+#define MONTY_H
 
-#include
-#include
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -33,5 +34,9 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void push(stack_t **stack, int value, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+
+extern stack_t *top;
 
 #endif

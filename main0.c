@@ -1,58 +1,50 @@
 #include "monty.h"
-stack_t *top = NULL;
 
-int
-main(int argc, char *argv[])
+/**
+ * main - Monty bytecode interpreter
+ * @argc: number of arguments passed
+ * @argv: array of argument strings
+ *
+ * Return: EXIT_SUCCESS on success or EXIT_FAILURE on failure
+ */
+int main(int argc, char *argv[])
 {
-	char buffer[1024];
-	char opcode[10];
-	int value;
+	stack_t *stack = NULL;
 	unsigned int line_number = 0;
-	FILE *file;
-	stack_t *temp = top;
+	FILE *fs = NULL;
+	char *lineptr = NULL;
+	char *op = NULL;
+	size_t n = 0;
+
+	var.queue = 0;
+	var.stack_len = 0;
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
+		fprintf(stdout, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
-	file = fopen(argv[1], "r");
+	fs = fopen(argv[1], "r");
 
-	if (file == NULL)
+	if (fs == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
+		fprintf(stdout, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
-	while (fgets(buffer, sizeof(buffer), file) != NULL)
+
+	on_exit(free_lineptr, &lineptr);
+	on_exit(free_stack, &stack);
+	on_exit(fs_close, fs);
+
+	while (getline(&lineptr, &n, fs) != -1)
 	{
 		line_number++;
-		buffer[strcspn(buffer, "\n")] = '\0';
-		if (sscanf(buffer, "%s %d", opcode, &value) == 2)
+		op = strtok(lineptr, "\n\t\r ");
+
+		if (op != NULL && op[0] != '#')
 		{
-			if (strcmp(opcode, "push") == 0)
-			{
-				push(&top, value, line_number);
-			}
-			else if (strcmp(opcode, "pall") == 0)
-			{
-				pall(&top, line_number);
-			}
-			else
-			{
-				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-				fprintf(stderr, "USAGE: monty file\n");
-				fclose(file);
-				return (EXIT_FAILURE);
-			}
+			get_op(op, &stack, line_number);
 		}
 	}
-	fclose(file);
-
-	while (top != NULL)
-	{
-		top = top->next;
-		free(temp);
-	}
-	return (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
-

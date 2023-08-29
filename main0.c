@@ -30,11 +30,11 @@ main(int argc, char *argv[])
 		{
 			if (strcmp(opcode, "push") == 0)
 			{
-				push(&top, value, 0);
+				push(&top, value, line_number);
 			}
 			else if (strcmp(opcode, "pall") == 0)
 			{
-				pall(&top, 0);
+				pall(&top, line_number);
 			}
 			else
 			{

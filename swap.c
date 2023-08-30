@@ -13,7 +13,7 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if (var.stack_len < 2)
 	{
-		fprintf(stdout,	"L%u: can't swap, stack too short\n",	line_number);
+		fprintf(stderr,	"L%u: can't swap, stack too short\n",	line_number);
 		exit(EXIT_FAILURE);
 	}
 	if (var.stack_len == 2)
@@ -23,11 +23,9 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 
 	next = (*stack)->next;
-	next->prev = (*stack)->prev;
-	(*stack)->prev->next = next;
-	(*stack)->prev = next;
 	(*stack)->next = next->next;
-	next->next->prev = *stack;
 	next->next = *stack;
+	next->prev = NULL;
+	(*stack)->prev = next;
 	*stack = next;
 }

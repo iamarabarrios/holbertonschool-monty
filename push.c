@@ -31,13 +31,12 @@ void push(stack_t **stack, unsigned int line_number)
 
 	arg = strtok(NULL, "\n\t\r ");
 
-	int n = atoi(arg);
-
 	if (arg == NULL || check_for_digit(arg))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	int n = atoi(arg);
 
 	if (!add_node(stack, n))
 	{

@@ -35,13 +35,13 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (arg == NULL || check_for_digit(arg))
 	{
-		fprintf(stdout, "L%u: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
 	if (!add_node(stack, n))
 	{
-		fprintf(stdout, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	var.stack_len++;

@@ -15,7 +15,7 @@ void free_lineptr(int status __attribute__((unused)), void *arg)
 	}
 }
 
-/*
+/**
  * free_stack - Free stack
  * @status: int
  * @arg: Pointer
@@ -32,7 +32,7 @@ void free_stack(int status __attribute__((unused)), void *arg)
 	}
 }
 
-/*
+/**
  * fs_close - fclose
  * @status: int
  * @arg: Pointer
@@ -40,10 +40,10 @@ void free_stack(int status __attribute__((unused)), void *arg)
  */
 void fs_close(int status __attribute__((unused)), void *arg)
 {
-	FILE *fs;
+	FILE *fs = (FILE *) arg;
 
-	(void)status;
-
-	fs = (FILE *) arg;
-	fclose(fs);
+	if (fs != NULL)
+	{
+		fclose(fs);
+	}
 }

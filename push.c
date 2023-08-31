@@ -8,11 +8,14 @@
  */
 int check_for_digit(char *arg)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; arg[i]; i++)
+	if (arg[0] == '-')
+		i++;
+
+	for (; arg[i]; i++)
 	{
-		if ((arg[i] == '-' && i == 0) || !isdigit(arg[i]))
+		if (!isdigit(arg[i]))
 			return (1);
 	}
 	return (0);

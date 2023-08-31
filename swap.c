@@ -18,14 +18,20 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 	if (var.stack_len == 2)
 	{
-		*stack = (*stack)->next;
-		return;
+		next = (*stack)->next;
+		(*stack)->next = next->next;
+		next->next = *stack;
+		next->prev = NULL;
+		(*stack)->prev = next;
+		*stack = next;
 	}
-
-	next = (*stack)->next;
-	(*stack)->next = next->next;
-	next->next = *stack;
-	next->prev = NULL;
-	(*stack)->prev = next;
-	*stack = next;
+	else
+	{
+		next = (*stack)->next;
+		(*stack)->next = next->next;
+		next->next->prev = *stack;
+		next->next = (*stack);
+		(*stack)->prev = next;
+		(*stack) = next;
+	}
 }
